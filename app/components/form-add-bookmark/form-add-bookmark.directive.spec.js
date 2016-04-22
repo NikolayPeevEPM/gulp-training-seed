@@ -8,7 +8,9 @@ describe ('st.components.form-add-bookmark', function() {
                     return {
                         $promise: $q.when({})
                     }
-                }}
+                },
+                update: ""
+                }
             })
         });
     });
@@ -23,14 +25,12 @@ describe ('st.components.form-add-bookmark', function() {
 
     }));
 
-    it('should', function(){
-        isolatedScope.bookmark = {tags: '1,2,3'};
-        isolatedScope.addBookmark();
-        expect(1).toBe(1);
+    it('addBookmark should be defined', function(){
+        expect(isolatedScope.addBookmark).toBeDefined();
     });
 
-    it('should', function(){
-        isolatedScope.bookmark = {};
+    it('addBookmark should update if element is not new', function(){
+        isolatedScope.bookmark = {$$hashKey:'test value'};
         isolatedScope.addBookmark();
         expect(1).toBe(1);
     });

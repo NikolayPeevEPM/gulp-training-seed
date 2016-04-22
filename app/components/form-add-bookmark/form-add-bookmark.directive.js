@@ -15,12 +15,11 @@ angular.module('st.components.form-add-bookmark', [
                             bookmarkApplication.bookmarks.push($scope.bookmark);
                     })
                 }
-            }
+            };
 
-            $scope.clearForm = function (){
-                bookmark = mongolabFactory.query
-                bookmark = {};
-
+            $scope.clearForm = function () {
+               //TODO: qurey for the stored value of the bookmark and replace the modified with the original
+                $scope.bookmark = {};
             }
         }
     };
