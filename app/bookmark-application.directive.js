@@ -3,7 +3,8 @@ angular.module('sofia-training', [
     'st.components.bookmarks-list',
     'st.components.tags-list',
     'ngRoute',
-    'mongolab-factory'
+    'mongolab-factory',
+    'sofiaTraining.templates'
 ]).directive('bookmarkApplication', function (mongolabFactory) {
     return {
         templateUrl: 'app/bookmark-application.html',
@@ -25,3 +26,10 @@ angular.module('sofia-training', [
             redirectTo: '/'
         })
 }]);
+
+angular.module('sofiaTraining.templates', []);
+try {
+    angular.module('sofiaTraining.templates');
+} catch ( error ) {
+    angular.module('sofiaTraining.templates', []).constant('sofiaTrainingVersion', null);
+}
