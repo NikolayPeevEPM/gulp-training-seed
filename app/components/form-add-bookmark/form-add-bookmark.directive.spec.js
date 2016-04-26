@@ -6,7 +6,7 @@ describe ('st.components.form-add-bookmark', function() {
             $provide.factory('mongolabFactory',function($q) {
                 return { save: function(){
                     return {
-                        $promise: $q.when({})
+                        $promise: $q.resolve()
                     }
                 },
                 update: ""
@@ -32,6 +32,12 @@ describe ('st.components.form-add-bookmark', function() {
     it('addBookmark should update if element is not new', function(){
         isolatedScope.bookmark = {$$hashKey:'test value'};
         isolatedScope.addBookmark();
-        expect(1).toBe(1);
+        isolatedScope.$apply();
+    });
+
+    it('addBookmark should save if element is new', function(){
+        isolatedScope.bookmark = {};
+        isolatedScope.addBookmark();
+        isolatedScope.$apply();
     });
 });
