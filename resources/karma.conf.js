@@ -13,6 +13,9 @@ module.exports = function (config) {
             'bower_components/angular-animate/angular-animate.js',
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/angular-messages/angular-messages.js',
+            'bower_components/angular-material/angular-material.js',
+            'bower_components/angular-aria/angular-aria.js',
+            'bower_components/angular-route/angular-route.js',
             'resources/directive-builder.js',
             'resources/package-version/*.js',
             'resources/package-version/*spec.js',
@@ -35,7 +38,7 @@ module.exports = function (config) {
             'karma-junit-reporter'
         ],
         preprocessors: {
-            '{app,app/!(vendor|demo-code)+(**)/**}/!(*data|*spec)+(.js)': ['coverage'],
+            '{app,app/!(vendor|demo-code)+(**)/**}/!(*data|*spec|mongolab-factory)+(.js)': ['coverage'],
 
             'app/**/*.html': ['ng-html2js'],
             '**/*.json': ['ng-json2js']

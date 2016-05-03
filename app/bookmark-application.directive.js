@@ -10,7 +10,7 @@ angular.module('sofia-training', [
         templateUrl: 'app/bookmark-application.html',
         scope: {},
         controllerAs: 'bookmarkApplicationController',
-        controller: function($routeParams){
+        controller: function($routeParams,$scope){
             this.filterTag = $routeParams.tag;
             this.selectedBookmark = {};
             this.bookmarks = mongolabFactory.query();

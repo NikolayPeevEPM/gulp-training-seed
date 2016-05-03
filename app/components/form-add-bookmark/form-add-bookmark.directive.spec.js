@@ -3,25 +3,23 @@ describe ('st.components.form-add-bookmark', function() {
     beforeEach(function() {
         module('st.components.form-add-bookmark');
         module(function ($provide) {
-            $provide.factory('mongolabFactory',function($q) {
-                return { save: function(){
-                    return {
-                        $promise: $q.resolve()
-                    }
-                },
-                update: ""
+            $provide.factory('mongolabFactory',function() {
+                return {
+                    save: function(){},
+                    update: function(){}
                 }
             })
         });
     });
 
-    var isolatedScope;
-    beforeEach(inject(function($compile, $rootScope){
-        var scope = angular.extend($rootScope.$new(),{});
-        var element = $compile('<form-add-bookmark></form-add-bookmark>')(scope);
-        element.data('$bookmarkApplicationController',{});
+    var isolatedScope, mongolabFactory, element, scope;
+    beforeEach(inject(function($compile, $rootScope, _mongolabFactory_){
+        scope = angular.extend($rootScope.$new(),{});
+        element = $compile('<form-add-bookmark></form-add-bookmark>')(scope);
+        element.data('$bookmarkApplicationController',{bookmarks:[]});
         scope.$digest();
         isolatedScope  = element.isolateScope();
+        mongolabFactory = _mongolabFactory_;
 
     }));
 
@@ -30,14 +28,39 @@ describe ('st.components.form-add-bookmark', function() {
     });
 
     it('addBookmark should update if element is not new', function(){
-        isolatedScope.bookmark = {$$hashKey:'test value'};
+        spyOn(mongolabFactory, 'update').and.returnValue({success:function(){}});
+        spyOn(mongolabFactory, 'save').and.returnValue({success:function(){}});
+        isolatedScope.bookmark = {$$hashKey:'test value', _id: {$oid: 'test value'}};
         isolatedScope.addBookmark();
-        isolatedScope.$apply();
+        expect(mongolabFactory.update).toHaveBeenCalled();
+        expect(mongolabFactory.save).not.toHaveBeenCalled();
     });
 
     it('addBookmark should save if element is new', function(){
+        spyOn(mongolabFactory, 'update').and.returnValue({success:function(){}});
+        spyOn(mongolabFactory, 'save').and.returnValue({$promise:{then:function(){}}});
         isolatedScope.bookmark = {};
         isolatedScope.addBookmark();
-        isolatedScope.$apply();
+        expect(mongolabFactory.update).not.toHaveBeenCalled();
+        expect(mongolabFactory.save).toHaveBeenCalled();
+    });
+
+    it('addBookmark should push new element in controller array bookmarks', function(){
+        isolatedScope.bookmark = 'test value';
+        spyOn(mongolabFactory, 'save').and.returnValue({$promise:{then:function(cb){
+            cb();
+        }}});
+        isolatedScope.addBookmark();
+        expect(element.data('$bookmarkApplicationController').bookmarks).toEqual([isolatedScope.bookmark]);
+     });
+
+    it('clearForm should be defined', function(){
+        expect(isolatedScope.clearForm).toBeDefined();
+    });
+
+    it('clearForm should clear form', function(){
+        isolatedScope.bookmark = {key:'test value'};
+        isolatedScope.clearForm();
+        expect(isolatedScope.bookmark).toEqual({});
     });
 });

@@ -1,3 +1,6 @@
 <form-add-bookmark bookmark="bookmarkApplicationController.selectedBookmark" ></form-add-bookmark>
-<bookmarks-list bookmarks="bookmarkApplicationController.bookmarks"></bookmarks-list>
+<bookmarks-list
+    filter-tag="bookmarkApplicationController.filterTag"
+    bookmarks="bookmarkApplicationController.bookmarks"></bookmarks-list>
 <tags-list bookmarks="bookmarkApplicationController.bookmarks"></tags-list>
+{{bookmarkApplicationController.filterTag}}

@@ -5,12 +5,13 @@ angular.module('st.components.bookmarks-list', [
     return {
         templateUrl: 'app/components/bookmarks-list/bookmarks-list.html',
         require: '^bookmarkApplication',
-        scope: { bookmarks : '='},
-        link: function ($scope, $element, $attr, bookmarkApplication) {
-            $scope.filterTag = bookmarkApplication.filterTag;
-
+        scope: {
+            bookmarks : '=',
+            filterTag :'='
+        },
+        link: function ($scope, $element, $attr, bookmarkApplicationController) {
             $scope.editBookmark = function(bookmark) {
-                bookmarkApplication.selectedBookmark = bookmark;
+                bookmarkApplicationController.selectedBookmark = bookmark;
             };
 
             $scope.deleteBookmark = function(bookmark) {
