@@ -1,7 +1,8 @@
 angular.module('st.components.bookmarks-list', [
     'ngMaterial',
+    'ngAnimate',
     'mongolab-factory'
-]).directive('bookmarksList', function (mongolabFactory) {
+]).directive('bookmarksList', function (mongolabFactory,$location) {
     return {
         templateUrl: 'app/components/bookmarks-list/bookmarks-list.html',
         require: '^bookmarkApplication',
@@ -15,9 +16,18 @@ angular.module('st.components.bookmarks-list', [
             };
 
             $scope.deleteBookmark = function(bookmark) {
-                mongolabFactory.remove({id: bookmark._id.$oid}).$promise.then(function (resource) {
+                bookmark.isBeingDeleted = true;
+                var promise = mongolabFactory.remove({id: bookmark._id.$oid}).$promise;
+                promise.then(function (resource) {
+                    bookmark.isBeingDeleted = false;
                     $scope.bookmarks.splice($scope.bookmarks.indexOf(bookmark),1);
+                },function (error){
+                    bookmark.isBeingDeleted = false;
                 });
+            };
+
+            $scope.clearFilter = function(bookmark) {
+                $location.url('/');
             };
         }
     };

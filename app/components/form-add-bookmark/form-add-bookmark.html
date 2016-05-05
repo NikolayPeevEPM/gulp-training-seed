@@ -22,14 +22,13 @@
                 <input name="tags" ng-model="bookmark.tags">
              </md-input-container>
 
-            <md-button class="md-accent md-raised md-primary"
-                       type="submit"
+            <md-button class="md-raised md-primary"
                        ng-click="addBookmark()"
-                       ng-disabled="addBookmarkForm.$invalid">
-                Save
+                       ng-disabled="addBookmarkForm.$invalid || isSaving">
+                {{isSaving ? 'Saving...' : 'Save'}}
             </md-button>
             <md-button class="md-accent md-raised md-primary"
-                       type="submit"
+                       ng-disabled="addBookmarkForm.$pristine || isSaving"
                        ng-click="clearForm()">
                 Cancel
             </md-button>

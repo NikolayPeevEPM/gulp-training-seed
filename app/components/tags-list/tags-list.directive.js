@@ -3,8 +3,12 @@ angular.module('st.components.tags-list', [
     return {
         templateUrl: 'app/components/tags-list/tags-list.html',
         scope: { bookmarks : '='},
-        link: function ( $scope, $element, $attr) {
+        controller: function ( $scope, $location) {
             $scope.tags = {};
+            $scope.filterByTag = function(tag){
+                $location.url('filter/' + tag);
+            };
+
             $scope.$watch('bookmarks', function() {
                 $scope.tags = $scope.bookmarks.reduce(function(tagMap, bookmark){
                     if (bookmark.tags) {
