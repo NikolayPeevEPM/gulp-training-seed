@@ -49,8 +49,9 @@ describe ('st.components.form-add-bookmark', function() {
     });
 
     it('addBookmark should push new element in controller array bookmarks', function(){
-        var testValue = 'test value';
+        var testValue = {key:'test value'};
         isolatedScope.bookmark = testValue;
+        scope.$digest();
         spyOn(mongolabFactory, 'save').and.returnValue({$promise:{then:function(cb){
             cb(testValue);
         }}});
