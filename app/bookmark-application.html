@@ -1,11 +1,11 @@
-<div layout="column" ng-cloak>
-    <div layout="row" layout-xs="column">
-        <form-add-bookmark flex="60" bookmark="bookmarkApplicationController.selectedBookmark" ></form-add-bookmark>
-        <div flex="5"></div>
-        <tags-list flex bookmarks="bookmarkApplicationController.bookmarks"></tags-list>
+<div layout="row" layout-xs="column" ng-cloak>
+    <div layout="column" flex="60">
+        <form-add-bookmark bookmark="bookmarkApplicationController.selectedBookmark"></form-add-bookmark>
+        <bookmarks-list
+            filter-tag="bookmarkApplicationController.filterTag"
+            bookmarks="bookmarkApplicationController.bookmarks">
+        </bookmarks-list>
     </div>
-    <bookmarks-list
-        filter-tag="bookmarkApplicationController.filterTag"
-        bookmarks="bookmarkApplicationController.bookmarks">
-    </bookmarks-list>
+    <div flex="5"></div>
+    <tags-list flex bookmarks="bookmarkApplicationController.bookmarks"></tags-list>
 </div>
