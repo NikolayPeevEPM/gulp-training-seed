@@ -1,5 +1,4 @@
 angular.module('st.components.bookmarks-list', [
-    'ngMaterial',
     'ngAnimate',
     'mongolab-factory'
 ]).directive('bookmarksList', function (mongolabFactory,$location) {

@@ -1,9 +1,9 @@
-<div layout="column" ng-cloak>
-    <md-subheader>
+<md-content layout="column" ng-cloak>
+    <h3>
         Filtered by tag:&nbsp{{filterTag || "None"}}
 
         <md-button ng-disabled="!filterTag" class="md-accent md-raised md-primary" ng-click="clearFilter()">Clear Filter</md-button>
-    </md-subheader>
+    </h3>
     <md-list>
         <md-list-item ng-disabled="bookmark.isBeingDeleted" ng-click="editBookmark(bookmark)" ng-repeat="bookmark in bookmarks | hasTag : filterTag">
            {{bookmark.title}}({{bookmark.url}}) | {{bookmark.tags}}
@@ -12,4 +12,4 @@
             </md-icon>
         </md-list-item>
     </md-list>
-</div>
+</md-content>

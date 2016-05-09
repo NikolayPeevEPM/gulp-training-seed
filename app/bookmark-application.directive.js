@@ -3,6 +3,7 @@ angular.module('sofia-training', [
     'st.components.bookmarks-list',
     'st.components.tags-list',
     'ngRoute',
+    'ngMaterial',
     'mongolab-factory',
     'sofiaTraining.templates'
 ]).directive('bookmarkApplication', function (mongolabFactory) {
@@ -25,7 +26,11 @@ angular.module('sofia-training', [
         }).otherwise({
             redirectTo: '/'
         })
-}]);
+}]).config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+        .primaryPalette('indigo')
+        .accentPalette('purple')
+ });
 
 angular.module('sofiaTraining.templates', []);
 try {

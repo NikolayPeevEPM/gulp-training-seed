@@ -1,8 +1,9 @@
-<div layout="column" ng-cloak>
-    <h2>Bookmarks Tags</h2>
+<md-content layout="column" ng-cloak>
+    <md-subheader class="md-warn md-hue-1">Tags List</md-subheader>
     <md-list>
-        <md-list-item ng-repeat="(tag,count) in tags"" ng-click="filterByTag(tag)">
+        <md-list-item
+            ng-repeat="(tag,count) in tags"" ng-click="filterByTag(tag)">
             {{tag}}({{count}})
         </md-list-item>
     </md-list>
-</div>
+</md-content>
